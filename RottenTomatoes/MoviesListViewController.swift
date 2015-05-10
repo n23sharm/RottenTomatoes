@@ -8,7 +8,7 @@
 
 import UIKit
 
-class ViewController: UIViewController, UITableViewDataSource {
+class MoviesListViewController: UIViewController, UITableViewDataSource {
     
     @IBOutlet weak var moviesTableView: UITableView!
     
@@ -48,6 +48,16 @@ class ViewController: UIViewController, UITableViewDataSource {
         cell.posterImage.setImageWithURL(posterUrl)
         
         return cell
+    }
+    
+    override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
+        let cell = sender as! UITableViewCell
+        let indexPath = self.moviesTableView.indexPathForCell(cell)
+        
+        let moviesJSON = moviesArray![indexPath!.row] as! NSDictionary
+        
+        let movieDetailsViewController = segue.destinationViewController as! MovieDetailsViewController
+        movieDetailsViewController.moviesJSON = moviesJSON
     }
 
 

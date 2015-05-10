@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		3A00A8AD1AFEF8A200D3C9BD /* MovieDetailsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A00A8AC1AFEF8A200D3C9BD /* MovieDetailsViewController.swift */; };
 		3A57AC631AF9B51800F432A7 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A57AC621AF9B51800F432A7 /* AppDelegate.swift */; };
 		3A57AC651AF9B51800F432A7 /* MoviesListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A57AC641AF9B51800F432A7 /* MoviesListViewController.swift */; };
 		3A57AC681AF9B51800F432A7 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 3A57AC661AF9B51800F432A7 /* Main.storyboard */; };
@@ -29,6 +30,7 @@
 
 /* Begin PBXFileReference section */
 		3A00A8A91AFEF56E00D3C9BD /* RottenTomatoes-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "RottenTomatoes-Bridging-Header.h"; sourceTree = "<group>"; };
+		3A00A8AC1AFEF8A200D3C9BD /* MovieDetailsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MovieDetailsViewController.swift; sourceTree = "<group>"; };
 		3A57AC5D1AF9B51800F432A7 /* RottenTomatoes.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = RottenTomatoes.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		3A57AC611AF9B51800F432A7 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		3A57AC621AF9B51800F432A7 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -128,6 +130,7 @@
 			isa = PBXGroup;
 			children = (
 				3A57AC641AF9B51800F432A7 /* MoviesListViewController.swift */,
+				3A00A8AC1AFEF8A200D3C9BD /* MovieDetailsViewController.swift */,
 			);
 			name = ViewControllers;
 			sourceTree = "<group>";
@@ -292,6 +295,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				3A00A8AD1AFEF8A200D3C9BD /* MovieDetailsViewController.swift in Sources */,
 				3A57AC651AF9B51800F432A7 /* MoviesListViewController.swift in Sources */,
 				3A57AC631AF9B51800F432A7 /* AppDelegate.swift in Sources */,
 				3A7EFA561AFEF225003A7995 /* MovieCell.swift in Sources */,
