@@ -14,10 +14,28 @@ class MoviesListViewController: UIViewController, UITableViewDataSource {
     @IBOutlet weak var spinner: UIActivityIndicatorView!
     
     var moviesArray: NSArray?
+    var refreshControl: UIRefreshControl!
 
+    override func viewDidLoad() {
+        super.viewDidLoad()
+        
+        self.refreshControl = UIRefreshControl()
+        self.refreshControl.attributedTitle = NSAttributedString(string: "Fetching Movies")
+        self.refreshControl.addTarget(self, action: "refresh:", forControlEvents: UIControlEvents.ValueChanged)
+        self.moviesTableView.addSubview(refreshControl)
+    }
+    
+    func refresh(sender:AnyObject) {
+        fetchMovies()
+    }
+    
     override func viewWillAppear(animated: Bool) {
         super.viewWillAppear(animated)
         
+        fetchMovies()
+    }
+    
+    func fetchMovies() {
         self.spinner.startAnimating()
         
         let rottenTomatoesUrlString = "https://gist.githubusercontent.com/timothy1ee/e41513a57049e21bc6cf/raw/b490e79be2d21818f28614ec933d5d8f467f0a66/gistfile1.json"
@@ -29,11 +47,11 @@ class MoviesListViewController: UIViewController, UITableViewDataSource {
                 self.moviesArray = dictionary["movies"] as! NSArray?
                 self.moviesTableView.reloadData()
                 self.spinner.stopAnimating()
+                self.refreshControl.endRefreshing()
             } else {
                 
             }
         })
-        
     }
     
     func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
