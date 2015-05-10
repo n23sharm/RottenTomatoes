@@ -1,29 +1,30 @@
 //
-//  ViewController.swift
+//  DVDListViewController.swift
 //  RottenTomatoes
 //
-//  Created by Neha Sharma on 5/5/15.
+//  Created by Neha Sharma on 5/10/15.
 //  Copyright (c) 2015 codepath. All rights reserved.
 //
 
 import UIKit
 
-class MoviesListViewController: UIViewController, UITableViewDataSource {
+class DVDListViewController: UIViewController {
+
     
-    @IBOutlet weak var moviesTableView: UITableView!
-    @IBOutlet weak var spinner: UIActivityIndicatorView!
+    @IBOutlet weak var dvdsTableView: UITableView!
     @IBOutlet weak var noNetworkLabel: UILabel!
+    @IBOutlet weak var spinner: UIActivityIndicatorView!
     
     var moviesArray: NSArray?
     var refreshControl: UIRefreshControl!
-
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
         self.refreshControl = UIRefreshControl()
         self.refreshControl.attributedTitle = NSAttributedString(string: "Fetching Movies")
         self.refreshControl.addTarget(self, action: "refresh:", forControlEvents: UIControlEvents.ValueChanged)
-        self.moviesTableView.addSubview(refreshControl)
+        self.dvdsTableView.addSubview(refreshControl)
     }
     
     func refresh(sender:AnyObject) {
@@ -39,17 +40,17 @@ class MoviesListViewController: UIViewController, UITableViewDataSource {
         if Reachability.isConnectedToNetwork() == true {
             self.noNetworkLabel.hidden = true;
             self.spinner.startAnimating()
-            let rottenTomatoesUrlString = "https://gist.githubusercontent.com/timothy1ee/d1778ca5b944ed974db0/raw/489d812c7ceeec0ac15ab77bf7c47849f2d1eb2b/gistfile1.json"
+            let rottenTomatoesUrlString = "https://gist.githubusercontent.com/timothy1ee/e41513a57049e21bc6cf/raw/b490e79be2d21818f28614ec933d5d8f467f0a66/gistfile1.json"
             let request = NSMutableURLRequest(URL: NSURL(string:rottenTomatoesUrlString)!)
             
             NSURLConnection.sendAsynchronousRequest(request, queue: NSOperationQueue.mainQueue(), completionHandler:{ (response, data, error) in
                 var errorValue: NSError? = nil
                 if let dictionary = NSJSONSerialization.JSONObjectWithData(data, options: nil, error: &errorValue) as! NSDictionary? {
                     self.moviesArray = dictionary["movies"] as! NSArray?
-                    self.moviesTableView.reloadData()
+                    self.dvdsTableView.reloadData()
                     self.spinner.stopAnimating()
                     self.refreshControl.endRefreshing()
-                } 
+                }
             })
         } else {
             self.spinner.stopAnimating()
@@ -63,7 +64,7 @@ class MoviesListViewController: UIViewController, UITableViewDataSource {
     }
     
     func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
-        let cell = self.moviesTableView.dequeueReusableCellWithIdentifier("MovieCell", forIndexPath: indexPath) as! MovieCell
+        let cell = self.dvdsTableView.dequeueReusableCellWithIdentifier("MovieCell", forIndexPath: indexPath) as! MovieCell
         
         let movieJSON = moviesArray![indexPath.row] as! NSDictionary
         cell.movieTitle!.text = movieJSON["title"] as? String
@@ -77,33 +78,33 @@ class MoviesListViewController: UIViewController, UITableViewDataSource {
         cell.ratingPercent!.text = "\(ratingPercent)%"
         
         let rating = ratingsJSON["critics_rating"] as! String
-
+        
         switch rating {
-            case "Fresh":
-                cell.tomatoIcon.image = UIImage(named: "fresh")
-            case "Rotten":
-                cell.tomatoIcon.image = UIImage(named: "rotten")
-            case "Certified Fresh":
-                cell.tomatoIcon.image = UIImage(named: "certified_fresh")
-            default:
-                cell.tomatoIcon.image = UIImage(named: "fresh")
+        case "Fresh":
+            cell.tomatoIcon.image = UIImage(named: "fresh")
+        case "Rotten":
+            cell.tomatoIcon.image = UIImage(named: "rotten")
+        case "Certified Fresh":
+            cell.tomatoIcon.image = UIImage(named: "certified_fresh")
+        default:
+            cell.tomatoIcon.image = UIImage(named: "fresh")
             
         }
-
+        
         
         return cell
     }
     
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
         let cell = sender as! UITableViewCell
-        let indexPath = self.moviesTableView.indexPathForCell(cell)
+        let indexPath = self.dvdsTableView.indexPathForCell(cell)
         
         let moviesJSON = moviesArray![indexPath!.row] as! NSDictionary
         
         let movieDetailsViewController = segue.destinationViewController as! MovieDetailsViewController
         movieDetailsViewController.moviesJSON = moviesJSON
     }
+    
 
 
 }
-
