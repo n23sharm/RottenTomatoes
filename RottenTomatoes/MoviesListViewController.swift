@@ -38,10 +38,14 @@ class ViewController: UIViewController, UITableViewDataSource {
     }
     
     func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
-        let cell = UITableViewCell(style: .Default, reuseIdentifier: nil)
+        let cell = self.moviesTableView.dequeueReusableCellWithIdentifier("MovieCell", forIndexPath: indexPath) as! MovieCell
         
         let movieJSON = moviesArray![indexPath.row] as! NSDictionary
-        cell.textLabel!.text = movieJSON["title"] as? String
+        cell.movieTitle!.text = movieJSON["title"] as? String
+        cell.movieSynopsis!.text = movieJSON["synopsis"] as? String
+        
+        let posterUrl = NSURL(string: movieJSON.valueForKeyPath("posters.thumbnail") as! String)!
+        cell.posterImage.setImageWithURL(posterUrl)
         
         return cell
     }
