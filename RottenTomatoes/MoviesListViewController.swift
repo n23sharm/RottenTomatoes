@@ -49,9 +49,7 @@ class MoviesListViewController: UIViewController, UITableViewDataSource {
                     self.moviesTableView.reloadData()
                     self.spinner.stopAnimating()
                     self.refreshControl.endRefreshing()
-                } else {
-                    
-                }
+                } 
             })
         } else {
             self.spinner.stopAnimating()
@@ -69,10 +67,29 @@ class MoviesListViewController: UIViewController, UITableViewDataSource {
         
         let movieJSON = moviesArray![indexPath.row] as! NSDictionary
         cell.movieTitle!.text = movieJSON["title"] as? String
-        cell.movieSynopsis!.text = movieJSON["synopsis"] as? String
+        cell.mpaRatingLabel!.text = movieJSON["mpaa_rating"] as? String
         
         let posterUrl = NSURL(string: movieJSON.valueForKeyPath("posters.thumbnail") as! String)!
         cell.posterImage.setImageWithURL(posterUrl)
+        
+        let ratingsJSON = movieJSON["ratings"] as! NSDictionary
+        let ratingPercent = ratingsJSON["critics_score"] as! Int
+        cell.ratingPercent!.text = "\(ratingPercent)%"
+        
+        let rating = ratingsJSON["critics_rating"] as! String
+
+        switch rating {
+            case "Fresh":
+                cell.tomatoIcon.image = UIImage(named: "fresh")
+            case "Rotten":
+                cell.tomatoIcon.image = UIImage(named: "rotten")
+            case "Certified Fresh":
+                cell.tomatoIcon.image = UIImage(named: "certified_fresh")
+            default:
+                cell.tomatoIcon.image = UIImage(named: "fresh")
+            
+        }
+
         
         return cell
     }
