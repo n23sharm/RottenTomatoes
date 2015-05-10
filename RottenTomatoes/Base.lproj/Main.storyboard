@@ -56,12 +56,18 @@
                                     <outlet property="dataSource" destination="vXZ-lx-hvc" id="99z-5w-1Ca"/>
                                 </connections>
                             </tableView>
+                            <activityIndicatorView hidden="YES" autoresizesSubviews="NO" opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" hidesWhenStopped="YES" style="whiteLarge" id="AXh-AS-xhf">
+                                <rect key="frame" x="0.0" y="266" width="320" height="37"/>
+                                <autoresizingMask key="autoresizingMask"/>
+                                <color key="color" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                            </activityIndicatorView>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
                     </view>
                     <navigationItem key="navigationItem" id="ejB-1O-ask"/>
                     <connections>
                         <outlet property="moviesTableView" destination="hKI-js-qM2" id="PYr-ke-ZC0"/>
+                        <outlet property="spinner" destination="AXh-AS-xhf" id="Tzx-xY-ARc"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="x5A-6p-PRh" sceneMemberID="firstResponder"/>

@@ -11,13 +11,15 @@ import UIKit
 class MoviesListViewController: UIViewController, UITableViewDataSource {
     
     @IBOutlet weak var moviesTableView: UITableView!
+    @IBOutlet weak var spinner: UIActivityIndicatorView!
     
     var moviesArray: NSArray?
 
     override func viewWillAppear(animated: Bool) {
         super.viewWillAppear(animated)
-        let apiKey = "nsx68hxnv7aanuyzkkat69w7"
-      //  let rottenTomatoesUrlString = "http://api.rottentomatoes.com/api/public/v1.0/lists/dvds/top_rentals.json?apikey=" + apiKey
+        
+        self.spinner.startAnimating()
+        
         let rottenTomatoesUrlString = "https://gist.githubusercontent.com/timothy1ee/e41513a57049e21bc6cf/raw/b490e79be2d21818f28614ec933d5d8f467f0a66/gistfile1.json"
         let request = NSMutableURLRequest(URL: NSURL(string:rottenTomatoesUrlString)!)
         
@@ -26,6 +28,7 @@ class MoviesListViewController: UIViewController, UITableViewDataSource {
             if let dictionary = NSJSONSerialization.JSONObjectWithData(data, options: nil, error: &errorValue) as! NSDictionary? {
                 self.moviesArray = dictionary["movies"] as! NSArray?
                 self.moviesTableView.reloadData()
+                self.spinner.stopAnimating()
             } else {
                 
             }
