@@ -16,9 +16,17 @@
                                 <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
                                 <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                <label key="tableHeaderView" opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="No network connectivity." textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="Cb9-fg-7uI">
+                                    <rect key="frame" x="0.0" y="64" width="320" height="43"/>
+                                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                    <color key="backgroundColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                    <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                                    <nil key="highlightedColor"/>
+                                </label>
                                 <prototypes>
                                     <tableViewCell contentMode="scaleToFill" selectionStyle="default" accessoryType="disclosureIndicator" indentationWidth="10" reuseIdentifier="MovieCell" rowHeight="175" id="jhf-o6-byz" customClass="MovieCell" customModule="RottenTomatoes" customModuleProvider="target">
-                                        <rect key="frame" x="0.0" y="86" width="320" height="175"/>
+                                        <rect key="frame" x="0.0" y="129" width="320" height="175"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" autoresizesSubviews="NO" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="jhf-o6-byz" id="80S-EZ-xxG">
                                             <rect key="frame" x="0.0" y="0.0" width="287" height="174"/>
@@ -67,6 +75,7 @@
                     <navigationItem key="navigationItem" id="ejB-1O-ask"/>
                     <connections>
                         <outlet property="moviesTableView" destination="hKI-js-qM2" id="PYr-ke-ZC0"/>
+                        <outlet property="noNetworkLabel" destination="Cb9-fg-7uI" id="Hac-Aq-hfd"/>
                         <outlet property="spinner" destination="AXh-AS-xhf" id="Tzx-xY-ARc"/>
                     </connections>
                 </viewController>

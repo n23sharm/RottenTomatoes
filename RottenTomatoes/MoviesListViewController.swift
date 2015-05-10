@@ -12,6 +12,7 @@ class MoviesListViewController: UIViewController, UITableViewDataSource {
     
     @IBOutlet weak var moviesTableView: UITableView!
     @IBOutlet weak var spinner: UIActivityIndicatorView!
+    @IBOutlet weak var noNetworkLabel: UILabel!
     
     var moviesArray: NSArray?
     var refreshControl: UIRefreshControl!
@@ -31,27 +32,32 @@ class MoviesListViewController: UIViewController, UITableViewDataSource {
     
     override func viewWillAppear(animated: Bool) {
         super.viewWillAppear(animated)
-        
         fetchMovies()
     }
     
     func fetchMovies() {
-        self.spinner.startAnimating()
-        
-        let rottenTomatoesUrlString = "https://gist.githubusercontent.com/timothy1ee/e41513a57049e21bc6cf/raw/b490e79be2d21818f28614ec933d5d8f467f0a66/gistfile1.json"
-        let request = NSMutableURLRequest(URL: NSURL(string:rottenTomatoesUrlString)!)
-        
-        NSURLConnection.sendAsynchronousRequest(request, queue: NSOperationQueue.mainQueue(), completionHandler:{ (response, data, error) in
-            var errorValue: NSError? = nil
-            if let dictionary = NSJSONSerialization.JSONObjectWithData(data, options: nil, error: &errorValue) as! NSDictionary? {
-                self.moviesArray = dictionary["movies"] as! NSArray?
-                self.moviesTableView.reloadData()
-                self.spinner.stopAnimating()
-                self.refreshControl.endRefreshing()
-            } else {
-                
-            }
-        })
+        if Reachability.isConnectedToNetwork() == true {
+            self.noNetworkLabel.hidden = true;
+            self.spinner.startAnimating()
+            let rottenTomatoesUrlString = "https://gist.githubusercontent.com/timothy1ee/e41513a57049e21bc6cf/raw/b490e79be2d21818f28614ec933d5d8f467f0a66/gistfile1.json"
+            let request = NSMutableURLRequest(URL: NSURL(string:rottenTomatoesUrlString)!)
+            
+            NSURLConnection.sendAsynchronousRequest(request, queue: NSOperationQueue.mainQueue(), completionHandler:{ (response, data, error) in
+                var errorValue: NSError? = nil
+                if let dictionary = NSJSONSerialization.JSONObjectWithData(data, options: nil, error: &errorValue) as! NSDictionary? {
+                    self.moviesArray = dictionary["movies"] as! NSArray?
+                    self.moviesTableView.reloadData()
+                    self.spinner.stopAnimating()
+                    self.refreshControl.endRefreshing()
+                } else {
+                    
+                }
+            })
+        } else {
+            self.spinner.stopAnimating()
+            self.refreshControl.endRefreshing()
+            self.noNetworkLabel.hidden = false;
+        }
     }
     
     func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
