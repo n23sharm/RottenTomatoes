@@ -32,6 +32,13 @@ class MoviesListViewController: UIViewController, UITableViewDataSource {
     
     override func viewWillAppear(animated: Bool) {
         super.viewWillAppear(animated)
+        
+        self.tabBarController!.navigationItem.title = "Top Movies"
+
+        let colour = UIColor(red: 236.0/255.0, green: 130.0/255.0, blue: 130.0/255.0, alpha: 1.0)
+
+        self.navigationController!.navigationBar.barTintColor = colour
+        UITabBar.appearance().barTintColor = colour
         fetchMovies()
     }
     
@@ -89,8 +96,6 @@ class MoviesListViewController: UIViewController, UITableViewDataSource {
                 cell.tomatoIcon.image = UIImage(named: "fresh")
             
         }
-
-        
         return cell
     }
     

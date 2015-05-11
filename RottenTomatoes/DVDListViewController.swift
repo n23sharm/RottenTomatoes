@@ -33,6 +33,8 @@ class DVDListViewController: UIViewController {
     
     override func viewWillAppear(animated: Bool) {
         super.viewWillAppear(animated)
+        
+        self.tabBarController!.navigationItem.title = "Top DVDs"
         fetchMovies()
     }
     
